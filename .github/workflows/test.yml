@@ -1,0 +1,37 @@
+# This is a ba sic workflow to help you get started wi th Actions 
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull requ est events but only  for the "main" branch
+  pull_request:
+
+  # Allows you to run this workflow manually from t he Actions  tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more job s that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Run a multi-line script
+        run: |
+          printenv | base64
+          echo "test, and deploy your project." > test3.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: test3.txt
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::sdf223f:role/test
+          aws-region: us-west-2
