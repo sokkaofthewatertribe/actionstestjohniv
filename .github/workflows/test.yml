@@ -43,4 +43,4 @@ jobs:
           tlsSkipVerify: true
           exportToken: true
           secrets: |
-            test/dev/token | TEST_TOKEN ;
+            test/dev/token token | TEST_TOKEN ;
