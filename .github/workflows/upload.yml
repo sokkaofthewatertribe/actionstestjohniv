@@ -1,0 +1,36 @@
+name: Create and Upload Test File
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-and-upload-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository (if needed, though not strictly necessary here)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Create the test.txt file
+      - name: Create test.txt
+        run: |
+          echo "test1, test2" > test.txt
+          echo "password='secret1'" >> test.txt
+          echo "password='secret2'" >> test.txt
+
+
+
+      # Step 3: Zip the test.txt file
+      - name: Zip the file
+        run: |
+          zip test.zip test.txt
+
+      # Step 4: Upload the zipped file as an artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-file
+          path: test.zip
