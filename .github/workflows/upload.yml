@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-file2
-          path: test.env
+          path: test2.env
           
 
       # Step 4: Upload the zipped file as an artifact
