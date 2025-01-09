@@ -20,17 +20,17 @@ jobs:
           echo "test1, test2" > test.txt
           echo "password='secret1'" >> test.txt
           echo "password='secret2'" >> test.txt
-
-
-
-      # Step 3: Zip the test.txt file
-      - name: Zip the file
+      # Step 2: Create the test.txt file
+      - name: Create test2.txt
         run: |
-          zip test.zip test.txt
+          echo "test1, test2" > test.txt
+          echo "password='secret3'" >> test.txt
+          echo "password='secret4'" >> test.txt
+
 
       # Step 4: Upload the zipped file as an artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: test-file
-          path: test.zip
+          name: test-file2
+          path: test.env
